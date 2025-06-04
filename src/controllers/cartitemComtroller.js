@@ -1,10 +1,6 @@
 
 async function inserirItens() {
-    const {cart_id, product_id, quantity} = req.body
-
-    if (!Number.isInteger(cart_id) || !Number.isInteger(product_id) || !Number.isInteger(quantity)) {
-        return res.status(400).json({error: "Erro no corpo da requisição"})
-    }
+   
      
     try {
 

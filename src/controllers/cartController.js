@@ -1,16 +1,19 @@
-
-async function listarItens() {
-    try {
-        const result = await client.query(
-            'SELECT * FROM cart_item WHERE cart_id = $1',
-             [req.params.id]
-        )
-        res.status(200).json(result.rows)
-       } catch (error) {
-            console.log("Erro ao listar itens do carrinho", error)
-            res.status(500).json({error: 'Erro ao buscar itens'})
-       }  
-}
+const router = require('express').Router();
+const { inserirItens, alterarItens, deletarItens} = require('../controllers/cartItemController.js')
 
 
-module.exports = listarItens
+
+ //insere itens no carrinho
+router.post('/item', async (req, res) => {
+    res.send(await inserirItens(req.body)) 
+ })
+
+ //Alterar a quantidade item carrinho
+router.put('/item/:id', async (req, res) => {
+    res.send(await alterarItens(req.params.id, req.body)) 
+})
+
+//deleta item
+router.delete('/item/:id', async (req, res) => {
+    res.send(await deletarItens(req.params.id)) 
+})
